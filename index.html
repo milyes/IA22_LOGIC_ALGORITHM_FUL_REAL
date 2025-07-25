@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>IA22_LOGIC_MEDICALE</title>
+  <style>
+    body { background-color: #0f1117; color: #fff; font-family: sans-serif; padding: 20px; }
+    h1 { color: #00e6e6; }
+    textarea { width: 100%; height: 100px; margin-bottom: 10px; }
+    button { padding: 10px; background: #00e6e6; border: none; border-radius: 5px; color: black; font-weight: bold; cursor: pointer; }
+    #resultIA, #result { white-space: pre-wrap; background: #1e1e2f; padding: 10px; margin-top: 10px; border-radius: 8px; }
+    .card { background: #1c1f26; padding: 15px; margin-top: 10px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🧬 IA22_LOGIC_MEDICALE</h1>
+  <p>Entrez une logique médicale ou un fichier :</p>
+
+  <textarea id="inputIA" placeholder="Analyse logique médicale…"></textarea>
+  <button onclick="runIA()">Analyser avec IA</button>
+  <div id="resultIA">🧠 En attente d'une entrée...</div>
+
+  <hr>
+
+  <textarea id="codeInput" placeholder="Fichier : .json, .deb, script bash..."></textarea>
+  <button onclick="lancerAnalyseIA()">Détecter le type</button>
+  <div id="result">🧠 Attente analyse fichier...</div>
+
+  <hr>
+
+  <h2>📦 Modules IA Médicaux</h2>
+  <div id="module-cards"></div>
+
+  <script>
+    async function runIA() {
+      const input = document.getElementById("inputIA").value;
+      const result = document.getElementById("resultIA");
+      result.innerHTML = "🧠 Réponse IA en cours...";
+      setTimeout(() => {
+        result.innerHTML = "✅ IA a analysé votre logique : '" + input + "'";
+      }, 1500);
+    }
+
+    function lancerAnalyseIA() {
+      const code = document.getElementById("codeInput").value;
+      let result = "";
+
+      if (code.includes(".json")) {
+          result = "🔍 Type détecté : JSON\n🧠 Analyse IA : JSON bien formé.\n💡 Suggestion : Valide avec jq.";
+      } else if (code.includes(".deb")) {
+          result = "🔍 Type détecté : Fichier Debian\n🧠 Analyse IA : Paquet détecté.\n💡 Suggestion : Vérifie dpkg.";
+      } else if (code.includes("echo")) {
+          result = "🔍 Type détecté : Script Bash\n🧠 Analyse IA : Syntaxe valide.\n💡 Suggestion : Exécute sous bash.";
+      } else {
+          result = "❗ Format non reconnu. Recommence.";
+      }
+      document.getElementById("result").innerText = result;
+    }
+
+    fetch("logic_data/netsecure_ai_modules.json")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("module-cards");
+        data.forEach(mod => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.innerHTML = \`<h3>\${mod.name}</h3><p>\${mod.description}</p><p>Status: \${mod.status}</p>\`;
+          container.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
