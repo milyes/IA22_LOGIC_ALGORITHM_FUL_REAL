@@ -1,73 +1,107 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>IA22_LOGIC_MEDICALE</title>
-  <style>
-    body { background-color: #0f1117; color: #fff; font-family: sans-serif; padding: 20px; }
-    h1 { color: #00e6e6; }
-    textarea { width: 100%; height: 100px; margin-bottom: 10px; }
-    button { padding: 10px; background: #00e6e6; border: none; border-radius: 5px; color: black; font-weight: bold; cursor: pointer; }
-    #resultIA, #result { white-space: pre-wrap; background: #1e1e2f; padding: 10px; margin-top: 10px; border-radius: 8px; }
-    .card { background: #1c1f26; padding: 15px; margin-top: 10px; border-radius: 10px; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IA22_LOGIC Médicale - Lancement fonctionnel</title>
+<style>
+  body {
+    background: #121212;
+    color: #e0e0e0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+  }
+  #module-cards > div {
+    background: #1c1f26;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  button {
+    background: #4caf50;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button:active {
+    background: #388e3c;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    background: #222529;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  #resultIA {
+    margin-top: 20px;
+    padding: 15px;
+    background: #2c313a;
+    border-radius: 8px;
+    min-height: 60px;
+    white-space: pre-wrap;
+  }
+</style>
 </head>
 <body>
-  <h1>🧬 IA22_LOGIC_MEDICALE</h1>
-  <p>Entrez une logique médicale ou un fichier :</p>
 
-  <textarea id="inputIA" placeholder="Analyse logique médicale…"></textarea>
-  <button onclick="runIA()">Analyser avec IA</button>
-  <div id="resultIA">🧠 En attente d'une entrée...</div>
+<h1>IA22_LOGIC Médicale - Lancement Fonctionnel</h1>
 
-  <hr>
+<label for="inputIA">Entrez votre requête logique IA :</label>
+<textarea id="inputIA" rows="3" placeholder="Exemple : analyser fichier JSON..."></textarea>
 
-  <textarea id="codeInput" placeholder="Fichier : .json, .deb, script bash..."></textarea>
-  <button onclick="lancerAnalyseIA()">Détecter le type</button>
-  <div id="result">🧠 Attente analyse fichier...</div>
+<button onclick="runIA()">Lancer IA</button>
 
-  <hr>
+<div id="resultIA">Résultat IA affiché ici...</div>
 
-  <h2>📦 Modules IA Médicaux</h2>
-  <div id="module-cards"></div>
+<h2>Modules IA disponibles</h2>
+<div id="module-cards"></div>
 
-  <script>
-    async function runIA() {
-      const input = document.getElementById("inputIA").value;
-      const result = document.getElementById("resultIA");
-      result.innerHTML = "🧠 Réponse IA en cours...";
-      setTimeout(() => {
-        result.innerHTML = "✅ IA a analysé votre logique : '" + input + "'";
-      }, 1500);
-    }
+<script>
+async function runIA() {
+  const input = document.getElementById("inputIA").value.trim();
+  const result = document.getElementById("resultIA");
+  if (!input) {
+    result.textContent = "⚠️ Veuillez entrer une requête valide.";
+    return;
+  }
+  result.textContent = "🧠 Analyse IA en cours...";
+  
+  // Simule une analyse IA simple avec délai
+  await new Promise(r => setTimeout(r, 1500));
+  
+  // Exemple d'analyse basique (à remplacer par moteur IA réel)
+  if (input.toLowerCase().includes(".json")) {
+    result.textContent = `✅ Analyse : Fichier JSON détecté.\nSuggestion : Vérifiez la structure avec jq.`;
+  } else if (input.toLowerCase().includes("deb")) {
+    result.textContent = `✅ Analyse : Paquet Debian détecté.\nSuggestion : Utilisez dpkg pour inspection.`;
+  } else if (input.toLowerCase().includes("bash") || input.toLowerCase().includes("echo")) {
+    result.textContent = `✅ Analyse : Script Bash détecté.\nSuggestion : Exécutez sous bash.`;
+  } else {
+    result.textContent = `❓ Type non reconnu. Veuillez reformuler.`;
+  }
+}
 
-    function lancerAnalyseIA() {
-      const code = document.getElementById("codeInput").value;
-      let result = "";
+fetch("logic_data/netsecure_ai_modules.json")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("module-cards");
+    data.forEach(mod => {
+      const card = document.createElement("div");
+      card.innerHTML = `<h3>${mod.name}</h3><p>${mod.description}</p><p><strong>Status:</strong> ${mod.status}</p>`;
+      container.appendChild(card);
+    });
+  })
+  .catch(() => {
+    document.getElementById("module-cards").textContent = "⚠️ Impossible de charger les modules IA.";
+  });
+</script>
 
-      if (code.includes(".json")) {
-          result = "🔍 Type détecté : JSON\n🧠 Analyse IA : JSON bien formé.\n💡 Suggestion : Valide avec jq.";
-      } else if (code.includes(".deb")) {
-          result = "🔍 Type détecté : Fichier Debian\n🧠 Analyse IA : Paquet détecté.\n💡 Suggestion : Vérifie dpkg.";
-      } else if (code.includes("echo")) {
-          result = "🔍 Type détecté : Script Bash\n🧠 Analyse IA : Syntaxe valide.\n💡 Suggestion : Exécute sous bash.";
-      } else {
-          result = "❗ Format non reconnu. Recommence.";
-      }
-      document.getElementById("result").innerText = result;
-    }
-
-    fetch("logic_data/netsecure_ai_modules.json")
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById("module-cards");
-        data.forEach(mod => {
-          const card = document.createElement("div");
-          card.classList.add("card");
-          card.innerHTML = \`<h3>\${mod.name}</h3><p>\${mod.description}</p><p>Status: \${mod.status}</p>\`;
-          container.appendChild(card);
-        });
-      });
-  </script>
 </body>
 </html>
