@@ -3,64 +3,68 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IA22_LOGIC Médicale - Lancement fonctionnel</title>
+<title>IA22_LOGIC Médicale - Interface IA</title>
 <style>
   body {
     background: #121212;
     color: #e0e0e0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     padding: 20px;
   }
-  #module-cards > div {
-    background: #1c1f26;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-  }
-  button {
-    background: #4caf50;
-    border: none;
-    padding: 10px 15px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  button:active {
-    background: #388e3c;
-  }
-  input, textarea {
+  #inputIA {
     width: 100%;
     padding: 10px;
-    background: #222529;
-    border: none;
-    color: white;
+    font-size: 1.2em;
     border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 1rem;
-    resize: vertical;
+    border: none;
+    margin-bottom: 10px;
+  }
+  button {
+    padding: 10px 20px;
+    background: #0f62fe;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  button:hover {
+    background: #0353e9;
   }
   #resultIA {
-    margin-top: 20px;
-    padding: 15px;
-    background: #2c313a;
+    margin-top: 15px;
+    min-height: 40px;
+    background: #1c1f26;
+    padding: 10px;
     border-radius: 8px;
-    min-height: 60px;
+    font-family: monospace;
     white-space: pre-wrap;
+  }
+  #module-cards {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    gap: 15px;
+  }
+  .module-card {
+    background: #1c1f26;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .module-card h3 {
+    margin: 0 0 10px;
   }
 </style>
 </head>
 <body>
+<h1>IA22_LOGIC Médicale - Interface IA</h1>
 
-<h1>IA22_LOGIC Médicale - Lancement Fonctionnel</h1>
-
-<label for="inputIA">Entrez votre requête logique IA :</label>
-<textarea id="inputIA" rows="3" placeholder="Exemple : analyser fichier JSON..."></textarea>
-
+<input id="inputIA" type="text" placeholder="Entrez votre requête IA ici..." />
 <button onclick="runIA()">Lancer IA</button>
 
-<div id="resultIA">Résultat IA affiché ici...</div>
+<div id="resultIA">🧠 Prêt à analyser...</div>
 
-<h2>Modules IA disponibles</h2>
+<h2>Modules IA Disponibles</h2>
 <div id="module-cards"></div>
 
 <script>
@@ -72,36 +76,29 @@ async function runIA() {
     return;
   }
   result.textContent = "🧠 Analyse IA en cours...";
-  
-  // Simule une analyse IA simple avec délai
-  await new Promise(r => setTimeout(r, 1500));
-  
-  // Exemple d'analyse basique (à remplacer par moteur IA réel)
-  if (input.toLowerCase().includes(".json")) {
-    result.textContent = `✅ Analyse : Fichier JSON détecté.\nSuggestion : Vérifiez la structure avec jq.`;
-  } else if (input.toLowerCase().includes("deb")) {
-    result.textContent = `✅ Analyse : Paquet Debian détecté.\nSuggestion : Utilisez dpkg pour inspection.`;
-  } else if (input.toLowerCase().includes("bash") || input.toLowerCase().includes("echo")) {
-    result.textContent = `✅ Analyse : Script Bash détecté.\nSuggestion : Exécutez sous bash.`;
-  } else {
-    result.textContent = `❓ Type non reconnu. Veuillez reformuler.`;
-  }
+  // Simule analyse IA avec timeout (à remplacer par appel réel API)
+  setTimeout(() => {
+    result.textContent = "✅ IA a analysé votre logique : '" + input + "'";
+  }, 1500);
 }
 
+// Chargement dynamique des modules IA depuis JSON local
 fetch("logic_data/netsecure_ai_modules.json")
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
     const container = document.getElementById("module-cards");
     data.forEach(mod => {
       const card = document.createElement("div");
-      card.innerHTML = `<h3>${mod.name}</h3><p>${mod.description}</p><p><strong>Status:</strong> ${mod.status}</p>`;
+      card.className = "module-card";
+      card.innerHTML = `<h3>${mod.name}</h3>
+                        <p>${mod.description}</p>
+                        <p><b>Status:</b> ${mod.status}</p>`;
       container.appendChild(card);
     });
   })
   .catch(() => {
-    document.getElementById("module-cards").textContent = "⚠️ Impossible de charger les modules IA.";
+    document.getElementById("module-cards").textContent = "Erreur chargement modules IA.";
   });
 </script>
-
 </body>
 </html>
