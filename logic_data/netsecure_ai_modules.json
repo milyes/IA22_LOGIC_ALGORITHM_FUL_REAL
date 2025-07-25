@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Diagnostic IA Cardiaque",
+    "description": "Module d’analyse des électrocardiogrammes (ECG) avec détection d’anomalies cardiaques.",
+    "status": "🟢 Actif"
+  },
+  {
+    "name": "Analyse IRM intelligente",
+    "description": "Détection de lésions cérébrales via algorithmes IA 3D.",
+    "status": "🟠 En développement"
+  },
+  {
+    "name": "Surveillance Glycémique IA",
+    "description": "Algorithme prédictif des variations de glucose basé sur données capteur CGM.",
+    "status": "🟢 Actif"
+  },
+  {
+    "name": "Prédiagnostic COVID-IA",
+    "description": "Module rapide de dépistage COVID basé sur symptômes et imagerie.",
+    "status": "🔴 Désactivé"
+  }
+]
