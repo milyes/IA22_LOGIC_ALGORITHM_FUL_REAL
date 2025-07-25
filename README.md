@@ -1,31 +1,17 @@
-# # IA22_LOGIC Médicale - Projet
+# IA22_LOGIC_ALGORITHM_FUL_REAL
 
-## Description
-Interface web interactive pour lancer des analyses IA sur des fichiers et scripts médicaux.  
-Charge dynamiquement les modules IA depuis JSON.
+🧠 Plateforme IA médicale intelligente — version publique.
 
-## Installation
-1. Cloner le repo
-2. Ouvrir `index.html` dans un navigateur moderne  
-ou  
-3. Lancer le script `setup.sh` (sur Linux/Termux)
+## 🔗 Accès en ligne
+👉 https://milyes.github.io/IA22_LOGIC_ALGORITHM_FUL_REAL/
 
-## Usage
-- Saisir une requête dans la zone prévue
-- Cliquer sur "Lancer IA"
-- Voir le résultat affiché en temps réel
-- Consulter la liste des modules IA disponibles
+## 📁 Contenu
+- `index.html` : interface Web IA
+- `logic_data/` : modules IA JS/CSS
+- `launcher_online.sh` : lanceur Web
+- `setup.sh` : installation & GitHub auto-sync
 
-## Hébergement
-- Hébergé sur GitHub Pages:  
-  https://milyes.github.io/IA22_LOGIC_ALGORITHM_FUL_REAL/
-
-## Auteur
-Zoubirou Mohammed Ilyes  
-[ORCID](https://orcid.org/0009-0007-7571-3178)  
-NetSecurePro - IA & Cybersécurité
-
----
-
-## Contribuer
-PRs bienvenus. Merci de suivre la structure du projet.
+## 👨‍💻 Auteur
+**Zoubirou Mohammed Ilyes**  
+ORCID : [https://orcid.org/0009-0007-7571-3178](https://orcid.org/0009-0007-7571-3178)  
+Organisation : **NetSecurePro_IA**
