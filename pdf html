@@ -1,0 +1,58 @@
+l<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Emprunts IA</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+        table { width: 100%%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #333; color: #fff; }
+        tr:nth-child(even) { background: #eee; }
+        input, button { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Gestion des emprunts (IA)</h1>
+<form action="/detecter_binaires" method="post">
+<a href="/export_pdf" target="_blank">[Exporter en PDF]</a> | <a href="/export_json" target="_blank">[Exporter en JSON]</a><br>
+<button type="submit">Détecter les commandes binaires</button>
+</form>
+
+<form action="/import_json" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Importer JSON</button>
+</form>
+
+    <form action="/ajouter" method="post">
+        <input type="text" name="nom" placeholder="Nom" required>
+        <input type="text" name="objet" placeholder="Objet emprunté" required>
+        <button type="submit">Ajouter</button>
+    </form>
+
+<form action="/import_json" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Importer JSON</button>
+</form>
+
+
+    <table>
+        <tr>
+            <th>ID</th><th>Nom</th><th>Objet</th><th>Date</th><th>Rendu</th><th>Actions</th>
+        </tr>
+        {% for e in emprunts %}
+        <tr>
+            <td>{{ e[0] }}</td>
+            <td>{{ e[1] }}</td>
+            <td>{{ e[2] }}</td>
+            <td>{{ e[3] }}</td>
+            <td>{{ "Oui" if e[4] == 1 else "Non" }}</td>
+            <td>
+                <a href="/rendu/{{ e[0] }}">Rendu</a> |
+                <a href="/supprimer/{{ e[0] }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
