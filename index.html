@@ -1,67 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IA22 – Logic Algorithm Full (REAL)</title>
+  <meta charset="UTF-8">
+  <title>IA22 LOGIC Médicale - NetSecurePro</title>
   <style>
-    /* Style sobre, sans effet néon */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      color: #222;
-      margin: 0;
-      padding: 2em;
-      line-height: 1.6;
-    }
-    h1, h2 {
-      color: #2c3e50;
-      margin-bottom: 0.5em;
-    }
-    a {
-      color: #1a73e8;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 2em;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-radius: 8px;
-    }
-    footer {
-      text-align: center;
-      margin-top: 3em;
-      font-size: 0.9em;
-      color: #666;
-    }
+    body { background: #121212; color: #fff; font-family: Arial; padding: 20px; }
+    h1 { color: #56e39f; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: none; }
+    button { background: #56e39f; color: #000; padding: 10px 20px; border: none; border-radius: 8px; margin-top: 10px; }
+    #module-cards div { background: #1c1f26; padding: 10px; margin: 10px 0; border-radius: 10px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>IA22 – Logic Algorithm Full (REAL)</h1>
-    <p>Ce module est signé par <strong>Zoubirou Mohammed Ilyes</strong> – <a href="https://orcid.org/0009-0007-7571-3178" target="_blank" rel="noopener noreferrer">ORCID</a></p>
-    <hr />
-    <section>
-      <h2>Présentation</h2>
-      <p>Bienvenue dans le module IA22 Logic Algorithm Full. Cette plateforme implémente les algorithmes intelligents développés et validés par notre équipe.</p>
-      <p>Vous pouvez consulter les différentes branches pour expérimentation, développement et tests APK mobile.</p>
-    </section>
-    <section>
-      <h2>Liens utiles</h2>
-      <ul>
-        <li><a href="https://github.com/milyes/IA22_LOGIC_ALGORITHM_FUL_REAL" target="_blank" rel="noopener noreferrer">Dépôt GitHub officiel</a></li>
-        <li><a href="launcher_online.sh" download>Télécharger le lanceur shell</a></li>
-        <li><a href="README.md" download>Lisez le README complet</a></li>
-      </ul>
-    </section>
-  </div>
-  <footer>
-    &copy; 2025 Zoubirou Mohammed Ilyes – NetSecurePro_IA
-  </footer>
+  <h1>🧠 IA22 LOGIC Médicale</h1>
+  <textarea id="inputIA" placeholder="Décrivez un symptôme ou entrez une requête médicale..."></textarea>
+  <button onclick="runIA()">Analyser</button>
+  <p id="resultIA"></p>
+
+  <h2>📦 Modules IA NetSecurePro</h2>
+  <div id="module-cards"></div>
+
+  <script src="assets/logic_engine.js"></script>
 </body>
 </html>

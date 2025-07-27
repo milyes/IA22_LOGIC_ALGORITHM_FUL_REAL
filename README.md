@@ -1,17 +1,17 @@
-# IA22_LOGIC_ALGORITHM_FUL_REAL
 
-🧠 Plateforme IA médicale intelligente — version publique.
+# IA22 LOGIC Médicale – NetSecurePro IA
 
-## 🔗 Accès en ligne
-👉 https://milyes.github.io/IA22_LOGIC_ALGORITHM_FUL_REAL/
+🧠 Interface HTML médicale intelligente pour analyse rapide de symptômes.  
+Développée par **Zoubirou Mohammed Ilyes**  
+🔗 ORCID : https://orcid.org/0009-0007-7571-3178
 
-## 📁 Contenu
-- `index.html` : interface Web IA
-- `logic_data/` : modules IA JS/CSS
-- `launcher_online.sh` : lanceur Web
-- `setup.sh` : installation & GitHub auto-sync
+## Contenu
+- `index.html` – Interface utilisateur
+- `assets/logic_engine.js` – Moteur IA local
+- `logic_data/*.json` – Modules IA déclarés
 
-## 👨‍💻 Auteur
-**Zoubirou Mohammed Ilyes**  
-ORCID : [https://orcid.org/0009-0007-7571-3178](https://orcid.org/0009-0007-7571-3178)  
-Organisation : **NetSecurePro_IA**
+## Utilisation
+Ouvrir `index.html` dans un navigateur ou une WebView (APK, Termux, etc.)
+
+## Licence
+MIT License
