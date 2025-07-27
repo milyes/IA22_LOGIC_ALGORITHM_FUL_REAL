@@ -1,34 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IA22 Algorithm Logic – NetSecurePro IA</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Emprunts IA</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+        table { width: 100%%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #333; color: #fff; }
+        tr:nth-child(even) { background: #eee; }
+        input, button { padding: 8px; margin: 5px; }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="assets/logo_netsecure.png" alt="Logo NetSecurePro IA">
-    <h1>IA22 – LOGIC & ALGORITHM INTELLIGENT</h1>
-    <p>Écosystème officiel de la plateforme <strong>NetSecurePro IA</strong></p>
-  </header>
+    <h1>Gestion des emprunts (IA)</h1>
+<form action="/detecter_binaires" method="post">
+<a href="/export_pdf" target="_blank">[Exporter en PDF]</a> | <a href="/export_json" target="_blank">[Exporter en JSON]</a><br>
+<button type="submit">Détecter les commandes binaires</button>
+</form>
 
-  <section id="modules">
-    <h2>Modules IA intégrés</h2>
-    <div id="module-cards"></div>
-  </section>
+<form action="/import_json" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Importer JSON</button>
+</form>
 
-  <section id="ia-console">
-    <h2>Console de logique IA</h2>
-    <textarea id="inputIA" placeholder="Tape ta commande IA ici..."></textarea>
-    <button onclick="runIA()">Lancer IA</button>
-    <div id="resultIA"></div>
-  </section>
+    <form action="/ajouter" method="post">
+        <input type="text" name="nom" placeholder="Nom" required>
+        <input type="text" name="objet" placeholder="Objet emprunté" required>
+        <button type="submit">Ajouter</button>
+    </form>
 
-  <footer>
-    <p>© 2025 – Zoubirou Mohammed Ilyes | ORCID: <a href="https://orcid.org/0009-0007-7571-3178">0009-0007-7571-3178</a></p>
-  </footer>
+<form action="/import_json" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Importer JSON</button>
+</form>
 
-  <script src="ai_interaction.js"></script>
+
+    <table>
+        <tr>
+            <th>ID</th><th>Nom</th><th>Objet</th><th>Date</th><th>Rendu</th><th>Actions</th>
+        </tr>
+        {% for e in emprunts %}
+        <tr>
+            <td>{{ e[0] }}</td>
+            <td>{{ e[1] }}</td>
+            <td>{{ e[2] }}</td>
+            <td>{{ e[3] }}</td>
+            <td>{{ "Oui" if e[4] == 1 else "Non" }}</td>
+            <td>
+                <a href="/rendu/{{ e[0] }}">Rendu</a> |
+                <a href="/supprimer/{{ e[0] }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
