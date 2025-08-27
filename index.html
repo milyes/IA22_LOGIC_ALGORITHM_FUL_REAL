@@ -1,58 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Emprunts IA</title>
-    <style>
-        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
-        table { width: 100%%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background: #333; color: #fff; }
-        tr:nth-child(even) { background: #eee; }
-        input, button { padding: 8px; margin: 5px; }
-    </style>
+  <meta charset="UTF-8">
+  <title>IA22 LOGIC Médicale - NetSecurePro</title>
+  <style>
+    body { background: #121212; color: #fff; font-family: Arial; padding: 20px; }
+    h1 { color: #56e39f; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: none; }
+    button { background: #56e39f; color: #000; padding: 10px 20px; border: none; border-radius: 8px; margin-top: 10px; }
+    #module-cards div { background: #1c1f26; padding: 10px; margin: 10px 0; border-radius: 10px; }
+  </style>
 </head>
 <body>
-    <h1>Gestion des emprunts (IA)</h1>
-<form action="/detecter_binaires" method="post">
-<a href="/export_pdf" target="_blank">[Exporter en PDF]</a> | <a href="/export_json" target="_blank">[Exporter en JSON]</a><br>
-<button type="submit">Détecter les commandes binaires</button>
-</form>
+  <h1>🧠 IA22 LOGIC Médicale</h1>
+  <textarea id="inputIA" placeholder="Décrivez un symptôme ou entrez une requête médicale..."></textarea>
+  <button onclick="runIA()">Analyser</button>
+  <p id="resultIA"></p>
 
-<form action="/import_json" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" required>
-    <button type="submit">Importer JSON</button>
-</form>
+  <h2>📦 Modules IA NetSecurePro</h2>
+  <div id="module-cards"></div>
 
-    <form action="/ajouter" method="post">
-        <input type="text" name="nom" placeholder="Nom" required>
-        <input type="text" name="objet" placeholder="Objet emprunté" required>
-        <button type="submit">Ajouter</button>
-    </form>
-
-<form action="/import_json" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" required>
-    <button type="submit">Importer JSON</button>
-</form>
-
-
-    <table>
-        <tr>
-            <th>ID</th><th>Nom</th><th>Objet</th><th>Date</th><th>Rendu</th><th>Actions</th>
-        </tr>
-        {% for e in emprunts %}
-        <tr>
-            <td>{{ e[0] }}</td>
-            <td>{{ e[1] }}</td>
-            <td>{{ e[2] }}</td>
-            <td>{{ e[3] }}</td>
-            <td>{{ "Oui" if e[4] == 1 else "Non" }}</td>
-            <td>
-                <a href="/rendu/{{ e[0] }}">Rendu</a> |
-                <a href="/supprimer/{{ e[0] }}">Supprimer</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+  <script src="assets/logic_engine.js"></script>
 </body>
 </html>
